@@ -1,8 +1,15 @@
-// MARK: Calculate Easter Date
+//
+//  CalculateEasterDate.swift
+//  Church Cal
+//
+//  Created by Joshua Rystedt on 11/10/15
+//
+
+import Foundation
 
 func calculateEasterDateFor(desiredYear: Int) -> NSDate {
-    // Returns Easter as a date object.
-
+    // Calculate the date for Easter in any given year
+    
     let a = desiredYear % 19
     let b = desiredYear / 100
     let c = desiredYear % 100
@@ -11,6 +18,12 @@ func calculateEasterDateFor(desiredYear: Int) -> NSDate {
     let f = d + e - 7 * ((a + 11 * d + 22 * e) / 451) + 114
     let month = f / 31
     let day = f % 31 + 1
-
-    return date.createCustomDate(month, day: day, year: desiredYear)
+    
+    // Create NSDate for Easter
+    
+    customDateComponents.month = month
+    customDateComponents.day = day
+    customDateComponents.year = desiredYear
+    
+    return calendar.dateFromComponents(customDateComponents)!
 }
